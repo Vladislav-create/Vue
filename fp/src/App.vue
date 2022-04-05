@@ -1,24 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Я ВЬЮ"/>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <HelloWorld msg="Я ВЬЮ" />
+    <MyExp />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import MyExp from "./components/MyExp.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    HelloWorld,
+    MyExp,
   },
   data() {
     return {
-      arr: []
-    }
-  }
-}
+      arr: [],
+    };
+  },
+};
 </script>
 
 <style>

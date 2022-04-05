@@ -75,6 +75,7 @@ export default {
       picked:''
     };
   },
+  
   methods: {
     sliceOperand(){
       if(this.picked === 'operand1'){
