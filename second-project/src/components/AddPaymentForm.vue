@@ -26,6 +26,9 @@ export default {
 
       return `${d}.${m}.${y}`;
     },
+    categoryList() {
+      return this.$store.getters.getCategoryList;
+    },
   },
   methods: {
     onSave() {
@@ -36,6 +39,11 @@ export default {
       };
       this.$emit("addNewPayment", data);
     },
+  },
+  maunted() {
+    if (!this.categoryList.length) {
+      this.$store.dispatch("fetchCategoryList");
+    }
   },
 };
 </script>
