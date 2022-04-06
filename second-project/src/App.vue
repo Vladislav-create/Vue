@@ -9,7 +9,13 @@
         <div v-show="showBtnAdd">
           <AddPaymentForm @addNewPayment="addData" />
         </div>
-        <PaymentDisplay :list="paymentsList" />
+        <PaymentDisplay :list="carrentElement" />
+        <MyPagination
+          :length="paymentsList.length"
+          :n="n"
+          :cur="cur"
+          @changePage="onChangePage"
+        />
       </main>
     </div>
   </div>
@@ -18,16 +24,20 @@
 <script>
 import AddPaymentForm from "./components/AddPaymentForm.vue";
 import PaymentDisplay from "./components/PaymentDisplay.vue";
+import MyPagination from "./components/MyPagination.vue";
 export default {
   name: "App",
   components: {
     PaymentDisplay,
     AddPaymentForm,
+    MyPagination,
   },
   data() {
     return {
       showBtnAdd: false,
       textBtn: "Показать форму",
+      n: 5,
+      cur: 1,
     };
   },
   methods: {
@@ -43,6 +53,9 @@ export default {
     addData(data) {
       this.$store.commit("addDataPaymentList", data);
     },
+    onChangePage(namberPage) {
+      this.cur = namberPage;
+    },
   },
   created() {
     // this.$store.commit('getDataApp', this.fetchData())
@@ -51,6 +64,12 @@ export default {
   computed: {
     paymentsList() {
       return this.$store.getters.getPaymentList;
+    },
+    carrentElement() {
+      return this.paymentsList.slice(
+        this.n * (this.cur - 1),
+        this.n * (this.cur - 1) + this.n
+      );
     },
   },
 };
