@@ -6,8 +6,16 @@
       </header>
       <main>
         <button @click="showForm">{{ textBtn }}</button>
-        <div v-show="showBtnAdd"><AddPaymentForm @addNewPayment="addData" /></div> 
-        <PaymentDisplay :list="paymentsList" />
+        <div v-show="showBtnAdd">
+          <AddPaymentForm @addNewPayment="addData" />
+        </div>
+        <PaymentDisplay :list="carrentElement" />
+        <MyPagination
+          :length="paymentsList.length"
+          :n="n"
+          :cur="cur"
+          @changePage="onChangePage"
+        />
       </main>
     </div>
   </div>
@@ -16,57 +24,53 @@
 <script>
 import AddPaymentForm from "./components/AddPaymentForm.vue";
 import PaymentDisplay from "./components/PaymentDisplay.vue";
+import MyPagination from "./components/MyPagination.vue";
 export default {
   name: "App",
   components: {
     PaymentDisplay,
     AddPaymentForm,
+    MyPagination,
   },
   data() {
     return {
-      paymentsList: [],
       showBtnAdd: false,
-      textBtn: 'Показать форму'
+      textBtn: "Показать форму",
+      n: 5,
+      cur: 1,
     };
   },
   methods: {
-    showForm(){
-      if(this.showBtnAdd === false){
-        this.showBtnAdd = true
-        this.textBtn = 'Скрыть форму'
+    showForm() {
+      if (this.showBtnAdd === false) {
+        this.showBtnAdd = true;
+        this.textBtn = "Скрыть форму";
       } else {
-        this.showBtnAdd = false
-        this.textBtn = 'Показать форму'
+        this.showBtnAdd = false;
+        this.textBtn = "Показать форму";
       }
     },
-    fetchData() {
-      return [
-        {
-          date: "29.03.2021",
-          category: "Food",
-          value: 120,
-          id: "1",
-        },
-        {
-          date: "30.03.2021",
-          category: "Sport",
-          value: 240,
-          id: "2",
-        },
-        {
-          date: "31.03.2021",
-          category: "Education",
-          value: 480,
-          id: "3",
-        },
-      ];
-    },
     addData(data) {
-      this.paymentsList.push(data);
+      this.$store.commit("addDataPaymentList", data);
+    },
+    onChangePage(namberPage) {
+      this.cur = namberPage;
     },
   },
   created() {
-    this.paymentsList = this.fetchData();
+    // this.$store.commit('getDataApp', this.fetchData())
+    this.$store.dispatch("fetchData");
+  },
+  computed: {
+    paymentsList() {
+      return this.$store.getters.getPaymentList;
+    },
+    carrentElement() {
+      return this.paymentsList.slice(
+        this.n * (this.cur - 1),
+        this.n * (this.cur - 1) + this.n
+      );
+    },
   },
 };
 </script>
