@@ -35,5 +35,8 @@ export default {
 <style lang="scss" module>
 .wrp {
   display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  cursor: pointer;
 }
 </style>

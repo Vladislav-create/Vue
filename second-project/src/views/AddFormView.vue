@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input placeholder="Amount" v-model="value" />
+    <input id="inpValue" placeholder="Value" v-model="value" />
     <div class="categoryList" v-if="categoryList.length">
       <select v-model="category">
         <option v-for="(option, idx) in categoryList" :key="idx">
@@ -8,7 +8,7 @@
         </option>
       </select>
     </div>
-    <input placeholder="Date" v-model="date" />
+    <input id="inpDate" placeholder="Date" v-model="date" />
     <button @click="onSave">Save!</button>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   methods: {
     onSave() {
       const data = {
-        value: this.value,
+        value: this.$route.query.value,
         category: this.category,
         data: this.data || this.getCurrentDate,
       };
@@ -47,11 +47,14 @@ export default {
     },
   },
   mounted() {
+    this.value = this.$route.query.value
+    this.category = this.$route.params.Category  
     if (!this.categoryList.length) {
       this.$store.dispatch("fetchCategoryList");
-    }
+    } 
   },
 };
+
 </script>
 
 <style lang="scss" scoped>
