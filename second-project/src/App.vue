@@ -6,7 +6,7 @@
       <router-link to="/about">About</router-link>
       <hr />
       <div>
-        <router-link to="/add/payment/Food?value=200"
+        <router-link to="/add/payment/Food?value=200" 
           >Добавить платеж категории Food с ценой 200</router-link
         ><br />
         <router-link to="/add/payment/Transport?value=50"

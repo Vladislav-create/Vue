@@ -1,21 +1,15 @@
 <template>
   <div>
-    <input id="inpValue" placeholder="Value" v-model="value" />
-    <div class="categoryList" v-if="categoryList.length">
-      <select v-model="category">
-        <option v-for="(option, idx) in categoryList" :key="idx">
-          {{ option }}
-        </option>
-      </select>
-    </div>
-    <input id="inpDate" placeholder="Date" v-model="date" />
+    <input placeholder="Amount" v-model="value" />
+    <input placeholder="Категория" v-model="category">
+    <input placeholder="Date" v-model="date" />
     <button @click="onSave">Save!</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AddPaymentForm",
+  name: "AddFormView",
   data() {
     return {
       value: "",
@@ -39,7 +33,7 @@ export default {
   methods: {
     onSave() {
       const data = {
-        value: this.$route.query.value,
+        value: this.value,
         category: this.category,
         data: this.data || this.getCurrentDate,
       };
@@ -47,14 +41,28 @@ export default {
     },
   },
   mounted() {
+    console.log(this.data)
     this.value = this.$route.query.value
-    this.category = this.$route.params.Category  
+    this.category = this.$route.params.Category
+    this.date = this.getCurrentDate
+
     if (!this.categoryList.length) {
       this.$store.dispatch("fetchCategoryList");
-    } 
+    }
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log(this.$store.state.paymentList)
+    this.value = to.query.value
+    this.category = to.params.Category
+    next()
+    // вызывается когда маршрут, что рендерит этот компонент изменился,
+    // но этот компонент будет повторно использован в новом маршруте.
+    // Например, для маршрута с динамическими параметрами `/foo/:id`, когда мы
+    // перемещаемся между `/foo/1` и `/foo/2`, экземпляр того же компонента `Foo`
+    // будет использован повторно, и этот хук будет вызван когда это случится.
+    // Также имеется доступ в `this` к экземпляру компонента.
   },
 };
-
 </script>
 
 <style lang="scss" scoped>

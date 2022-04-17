@@ -5,6 +5,7 @@ import DashboardView from '../views/DashboardView.vue'
 import AddFormView from '../views/AddFormView.vue'
 
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,6 +23,7 @@ const routes = [
     path: '/add/payment/:Category',
     name: 'AddFormView',
     component: AddFormView,
+
   },
   {
     path: '/about',
@@ -38,5 +40,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+
 
 export default router
