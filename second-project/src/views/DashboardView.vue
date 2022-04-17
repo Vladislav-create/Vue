@@ -55,10 +55,10 @@ export default {
       this.cur = namberPage;
     },
   },
-  created() {
-    // this.$store.commit('getDataApp', this.fetchData())
-    this.$store.dispatch("fetchData");
-  },
+  // created() {
+  //   // this.$store.commit('getDataApp', this.fetchData())
+  //   this.$store.dispatch("fetchData");
+  // },
   computed: {
     paymentsList() {
       return this.$store.getters.getPaymentList;

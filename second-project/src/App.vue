@@ -21,6 +21,17 @@
   </div>
 </template>
 
+<script>
+export default {
+  
+  created() {
+    // this.$store.commit('getDataApp', this.fetchData())
+    this.$store.dispatch("fetchData");
+  },
+
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
