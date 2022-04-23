@@ -2,9 +2,11 @@
   <div>
     <input placeholder="Amount" v-model="value" />
     <div class="categoryList" v-if="categoryList.length">
-        <select v-model="category">
-            <option v-for="(option, idx) in categoryList" :key="idx">{{ option }}</option>
-        </select>
+      <select v-model="category">
+        <option v-for="(option, idx) in categoryList" :key="idx">
+          {{ option }}
+        </option>
+      </select>
     </div>
     <input placeholder="Date" v-model="date" />
     <button @click="onSave">Save!</button>

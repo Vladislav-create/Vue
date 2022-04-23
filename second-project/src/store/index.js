@@ -38,7 +38,7 @@ export default new Vuex.Store({
             })
           }
           resolve(items)
-        }, 2000)
+        }, 200)
       }).then(res => {
         commit('getDataApp', res)
       })
@@ -47,7 +47,7 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(['Еда', 'Спорт', 'Транстпорт', 'Образование', 'Семья', 'Здоровье'])
-        }, 1000)
+        }, 100)
       }).then(res => {
         commit('addCategoryList', res)
       })
