@@ -16,11 +16,18 @@
 <script>
 export default {
   name: "AddPaymentForm",
+  props: {
+    settings: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       value: "",
       category: "",
       date: "",
+      whereWeSave: this.settings.title,
     };
   },
   computed: {
@@ -41,9 +48,17 @@ export default {
       const data = {
         value: this.value,
         category: this.category,
-        data: this.data || this.getCurrentDate,
+        date: this.getCurrentDate,
+        id: this.settings.id,
       };
-      this.$emit("addNewPayment", data);
+      if (this.whereWeSave == "Добавление статьи") {
+        this.$store.commit("addDataPaymentList", data);
+        console.log(this.whereWeSave);
+      } else if (this.whereWeSave == "Редактирование") {
+        this.$store.commit("editPayment", data);
+      }
+
+      // this.$emit("addNewPayment", data);
     },
   },
   mounted() {
