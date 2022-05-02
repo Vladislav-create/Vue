@@ -4,9 +4,9 @@
       <div class="title">Мой дневник затрат</div>
     </header>
     <main>
-      <button @click="showForm">{{ textBtn }}</button>
-      <div v-show="showBtnAdd">
-        <AddPaymentForm @addNewPayment="addData" />
+      <button v-if="showBtnAdd" @click="addFormOpen">{{ textBtn }}</button>
+      <div>
+        <!-- <AddPaymentForm @addNewPayment="addData" /> -->
       </div>
       <PaymentDisplay :list="carrentElement" />
       <MyPagination
@@ -20,19 +20,20 @@
 </template>
 
 <script>
-import AddPaymentForm from "../components/AddPaymentForm.vue";
+// import AddPaymentForm from "../components/AddPaymentForm.vue";
 import PaymentDisplay from "../components/PaymentDisplay.vue";
 import MyPagination from "../components/MyPagination.vue";
+
 export default {
   name: "PageDashboard",
   components: {
     PaymentDisplay,
-    AddPaymentForm,
+    // AddPaymentForm,
     MyPagination,
   },
   data() {
     return {
-      showBtnAdd: false,
+      showBtnAdd: true,
       textBtn: "Показать форму",
       n: 5,
       cur: 1,
@@ -53,6 +54,12 @@ export default {
     },
     onChangePage(namberPage) {
       this.cur = namberPage;
+    },
+    addFormOpen() {
+      this.$modal.show("AddPaymentForm", {
+        content: "addpaymentform",
+        title: "Добавление статьи",
+      });
     },
   },
   // created() {

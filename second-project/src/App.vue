@@ -6,7 +6,7 @@
       <router-link to="/about">About</router-link>
       <hr />
       <div>
-        <router-link to="/add/payment/Food?value=200" 
+        <router-link to="/add/payment/Food?value=200"
           >Добавить платеж категории Food с ценой 200</router-link
         ><br />
         <router-link to="/add/payment/Transport?value=50"
@@ -18,18 +18,52 @@
       </div>
     </nav>
     <router-view />
+    <transition name="fade">
+      <modal-window-add-payment-form v-if="modalShow" :settings='settings'/>
+    </transition>
+    <transition name="fade">
+      <context-menu />
+    </transition>
   </div>
 </template>
 
 <script>
+import ContextMenu from "./components/ContextMenu.vue";
+import ModalWindowAddPaymentForm from "./components/ModalWindowAddPaymentForm.vue";
 export default {
+  components: { ModalWindowAddPaymentForm, ContextMenu },
+  data() {
+    return {
+      modalShow: false,
+      settings: {},
+    };
+  },
   
+  methods: {
+    onShow(settings) {
+      this.modalShow = true;
+      this.settings = settings;
+      
+    },
+
+    onHide(settings) {
+      this.modalShow = false;
+      this.settings = settings;
+    },
+  },
+  mounted() {
+    this.$modal.EventBus.$on("shown", this.onShow);
+    this.$modal.EventBus.$on("hide", this.onHide);
+  },
   created() {
     // this.$store.commit('getDataApp', this.fetchData())
     this.$store.dispatch("fetchData");
   },
-
-}
+  beforeDestroy() {
+    this.$modal.EventBus.$off("shown", this.onShow);
+    this.$modal.EventBus.$off("hide", this.onHide);
+  },
+};
 </script>
 
 <style lang="scss">
@@ -52,5 +86,14 @@ nav {
       color: #42b983;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
