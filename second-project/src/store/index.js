@@ -20,6 +20,14 @@ export default new Vuex.Store({
     addDataPaymentList(state, payload) {
       state.paymentList.push(payload)
     },
+    editPayment(state, payload) {
+
+      let editObjIndex = (element) => element.id == payload.id;
+      let index = state.paymentList.findIndex(editObjIndex);
+      this.state.paymentList.splice(index, 1, payload);
+
+      console.log(state, payload)
+    },
     addCategoryList(state, payload) {
       state.categoryList = payload
     }
