@@ -5,8 +5,8 @@
     <hr />
 
     <div class="display">
-      <input v-model.number="operand1" />
-      <input v-model.number="operand2" />
+      <input name="operand1" v-model.number="operand1" />
+      <input name="operand2" v-model.number="operand2" />
       = {{ result }}
     </div>
 
@@ -15,6 +15,7 @@
         v-for="operand in operands"
         :key="operand"
         :title="operand"
+        :name="operand"
         @click="calculate(operand)"
       >
         {{ operand }}
@@ -26,11 +27,11 @@
       <label for="checkbox">Отобразить экранную клавиатуру</label>
     </div>
 
-    <div v-show="checked">
-      <button v-for="btn in btns" :key="btn" @click="pushBtn(btn)">
+    <div v-if="checked">
+      <button v-for="btn in btns" :key="btn" @click="pushBtn(btn)" :name="btn">
         {{ btn }}
       </button>
-      <button @click="sliceOperand()">&#10229;</button>
+      <button name="slice" @click="sliceOperand()">&#10229;</button>
     </div>
 
     <div>
@@ -71,8 +72,8 @@ export default {
       operand1: "",
       operand2: "",
       result: 0,
-      checked: "",
-      picked:''
+      checked: true,
+      picked:'operand1'
     };
   },
   

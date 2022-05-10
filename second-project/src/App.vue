@@ -19,7 +19,7 @@
     </nav>
     <router-view />
     <transition name="fade">
-      <modal-window-add-payment-form v-if="modalShow" :settings='settings'/>
+      <modal-window-add-payment-form v-if="modalShow" :settings="settings" />
     </transition>
     <transition name="fade">
       <context-menu />
@@ -38,12 +38,11 @@ export default {
       settings: {},
     };
   },
-  
+
   methods: {
     onShow(settings) {
       this.modalShow = true;
       this.settings = settings;
-      
     },
 
     onHide(settings) {

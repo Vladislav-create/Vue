@@ -21,18 +21,17 @@ export default {
   methods: {
     editItem(item) {
       console.log(item);
-      console.log(this.$store.state.paymentList)
+      console.log(this.$store.state.paymentList);
       this.$modal.show("AddPaymentForm", {
         content: "addpaymentform",
         title: "Редактирование",
-        id: item.id
+        id: item.id,
       });
     },
     deleteItem(id) {
       let delObjIndex = (element) => element.id == id;
       let idx = this.$store.state.paymentList.findIndex(delObjIndex);
       this.$store.state.paymentList.splice(idx, 1);
-      
     },
     onClickContextItem(event, item) {
       const items = [
