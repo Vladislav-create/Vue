@@ -61,7 +61,7 @@ export default {
       const data = {
         value: this.value,
         category: this.category,
-        data: this.data || this.getCurrentDate,
+        date: this.date || this.getCurrentDate,
       };
       this.$store.commit("addDataPaymentList", data);
     },
@@ -69,7 +69,7 @@ export default {
       const el = {
         value: this.value,
         category: this.category,
-        data: this.getCurrentDate,
+        date: this.getCurrentDate,
       };
        this.$store.commit("addDataPaymentList", el);
     },
