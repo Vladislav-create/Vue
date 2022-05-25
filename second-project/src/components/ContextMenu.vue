@@ -1,5 +1,5 @@
 <template>
-  <div class="context-wrapper" v-if="isShow">
+  <div class="context-wrapper" :style="styles" v-if="isShow">
     <div
       class="context-item"
       v-for="(item, id) in items"
@@ -18,20 +18,36 @@ export default {
     return {
       isShow: false,
       items: [],
+      xPos: 0,
+      yPos: 0,
     };
+  },
+  computed: {
+    styles() {
+      return {
+        top: `${this.yPos + 10}px`,
+        left: `${this.xPos + 20}px`,
+      };
+    },
   },
   methods: {
     onClick(item) {
       item.action();
       this.$contextMenu.close();
     },
-    onShow({ items }) {
+    onShow({ caller, items }) {
       this.items = items;
       this.isShow = true;
+      this.setPosition(caller);
     },
     onClose() {
       this.items = [];
       this.isShow = false;
+    },
+    setPosition(caller) {
+      const pos = caller.getBoundingClientRect();
+      this.xPos = pos.left;
+      this.yPos = pos.top;
     },
   },
   mounted() {
@@ -50,9 +66,6 @@ export default {
   position: absolute;
   background-color: gold;
   cursor: pointer;
-  top: 22%;
-  left: 62%;
   border-radius: 11%;
 }
-
 </style>

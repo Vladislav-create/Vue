@@ -5,7 +5,7 @@
       <router-link to="/dashboard">Dashboard</router-link> |
       <router-link to="/about">About</router-link>
       <hr />
-      <div>
+      <!-- <div>
         <router-link to="/add/payment/Food?value=200"
           >Добавить платеж категории Food с ценой 200</router-link
         ><br />
@@ -15,7 +15,7 @@
         <router-link to="/add/payment/Entertainment?value=2000"
           >Категория Entertainment с ценой 2000</router-link
         >
-      </div>
+      </div> -->
     </nav>
     <router-view />
     <transition name="fade">
