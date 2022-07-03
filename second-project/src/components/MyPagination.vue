@@ -1,16 +1,35 @@
 <template>
-  <div :class="[$style.wrp]">
+  <div class="text-centr">
+    <v-pagination v-model='page'
+        :length='amount'
+        :total-visible="5"
+        @input="onClick(page)">
+      <!-- <div :class="[$style.wrp]">
+      <div @click="onClick(cur - 1)">-</div> -->
+      <!-- <div v-for="i in amount" :key="i" @click="onClick(i)">
+        {{ i }}
+      </div> -->
+      <!-- <div @click="onClick(cur + 1)">+</div> -->
+    <!-- </div> -->
+    </v-pagination>
+  </div>
+  <!-- <div :class="[$style.wrp]">
     <div @click="onClick(cur - 1)">-</div>
     <div v-for="i in amount" :key="i" @click="onClick(i)">
       {{ i }}
     </div>
     <div @click="onClick(cur + 1)">+</div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 export default {
   name: "MyPagination",
+  data(){
+    return {
+      page: 1,
+    }
+  },
   props: {
     length: Number,
     n: Number,
