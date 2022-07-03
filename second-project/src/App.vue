@@ -1,11 +1,17 @@
 <template>
-  <div id="app">
-    <nav>
+  <v-app>
+    <v-app-bar plain app>
+      <!-- <v-btn plain :ripple="false" to="/">Home</v-btn> -->
+      <v-btn plain :ripple="false" to="dashboard">Dashboard</v-btn>
+      <v-btn plain :ripple="false" to="about">About</v-btn>
+    </v-app-bar>
+    <!-- <div id="app"> -->
+    <!-- <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/dashboard">Dashboard</router-link> |
       <router-link to="/about">About</router-link>
       <hr />
-      <!-- <div>
+      <div>
         <router-link to="/add/payment/Food?value=200"
           >Добавить платеж категории Food с ценой 200</router-link
         ><br />
@@ -15,16 +21,19 @@
         <router-link to="/add/payment/Entertainment?value=2000"
           >Категория Entertainment с ценой 2000</router-link
         >
-      </div> -->
-    </nav>
-    <router-view />
-    <transition name="fade">
-      <modal-window-add-payment-form v-if="modalShow" :settings="settings" />
-    </transition>
-    <transition name="fade">
-      <context-menu />
-    </transition>
-  </div>
+      </div>
+    </nav>  -->
+    <v-main>
+      <router-view />
+      <transition name="fade">
+        <modal-window-add-payment-form v-if="modalShow" :settings="settings" />
+      </transition>
+      <transition name="fade">
+        <context-menu />
+      </transition>
+    </v-main>
+    <!-- </div> -->
+  </v-app>
 </template>
 
 <script>
